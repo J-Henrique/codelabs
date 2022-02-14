@@ -26,13 +26,13 @@ import androidx.room.Query
  * The Data Access Object for the Plant class.
  */
 @Dao
-interface PlantDao {
+abstract class PlantDao {
     @Query("SELECT * FROM plants ORDER BY name")
-    fun getPlants(): LiveData<List<Plant>>
+    abstract fun getPlants(): LiveData<List<Plant>>
 
     @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
-    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
+    abstract fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<Plant>)
+    abstract suspend fun insertAll(plants: List<Plant>)
 }
